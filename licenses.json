@@ -1,0 +1,224 @@
+{
+  "licenses": [
+    {
+      "id": "168ae4b8-089e-4461-85d6-a9ac0b16ec14",
+      "key": "PRO-F30CEE-B803AA-AD1C6B",
+      "tier": "pro",
+      "note": "",
+      "status": "active",
+      "device_id": "1d44c3a6-02ad-45e5-84df-748bbe0ae165",
+      "activated_at": "2026-03-31T06:50:17.014Z",
+      "created_at": "2026-03-31T05:53:46.853Z",
+      "expires_at": "2026-04-30T05:53:46.845Z"
+    },
+    {
+      "id": "81778f69-a0c1-48e3-b13f-944ddd980a44",
+      "key": "PRO-862C4E-63D4EA-6C8E39",
+      "tier": "pro",
+      "note": "",
+      "status": "active",
+      "device_id": null,
+      "activated_at": null,
+      "created_at": "2026-03-31T05:53:47.911Z",
+      "expires_at": "2026-04-30T05:53:47.909Z"
+    },
+    {
+      "id": "00aa3cbf-9e5d-457f-b68f-649f823cdaf1",
+      "key": "PRO-65D912-984915-6BADF8",
+      "tier": "pro",
+      "note": "",
+      "status": "active",
+      "device_id": "cb4454ed-e625-4af8-a616-103b542f485d",
+      "activated_at": "2026-03-31T06:30:53.280Z",
+      "created_at": "2026-03-31T05:53:48.615Z",
+      "expires_at": "2026-04-30T05:53:48.613Z"
+    },
+    {
+      "id": "2dc33c67-4f86-47c9-9f59-0d16f1670d70",
+      "key": "PRO-F84500-DC42E7-1860C0",
+      "tier": "pro",
+      "note": "",
+      "status": "active",
+      "device_id": "81a98cae-7b21-457a-8d1b-96bf22b0d876",
+      "activated_at": "2026-03-31T15:44:19.203Z",
+      "created_at": "2026-03-31T05:53:49.110Z",
+      "expires_at": "2026-04-30T05:53:49.109Z"
+    },
+    {
+      "id": "d5c59eba-ef64-4c7b-ada5-1f089c05734b",
+      "key": "PRO-5E99E4-120209-1D3BB2",
+      "tier": "pro",
+      "note": "",
+      "status": "active",
+      "device_id": null,
+      "activated_at": null,
+      "created_at": "2026-03-31T05:56:07.436Z",
+      "expires_at": "2026-04-30T05:56:07.429Z"
+    },
+    {
+      "id": "e6285713-a41a-46fb-9860-bd5a6a1a43c8",
+      "key": "PRO-1EAD5B-65ECB2-D2260E",
+      "tier": "pro",
+      "note": "",
+      "status": "active",
+      "device_id": null,
+      "activated_at": null,
+      "created_at": "2026-03-31T05:56:07.440Z",
+      "expires_at": "2026-04-30T05:56:07.429Z"
+    },
+    {
+      "id": "e2a4d504-7b33-42c8-b615-ec30a9136d8f",
+      "key": "PRO-3EE9A6-EBD573-6C04CA",
+      "tier": "pro",
+      "note": "",
+      "status": "active",
+      "device_id": null,
+      "activated_at": null,
+      "created_at": "2026-03-31T05:56:07.443Z",
+      "expires_at": "2026-04-30T05:56:07.429Z"
+    },
+    {
+      "id": "a9696537-2be5-4ebf-a2a1-616593830117",
+      "key": "PRO-B368EC-E89987-CB1C38",
+      "tier": "pro",
+      "note": "",
+      "status": "active",
+      "device_id": null,
+      "activated_at": null,
+      "created_at": "2026-03-31T05:56:07.446Z",
+      "expires_at": "2026-04-30T05:56:07.429Z"
+    },
+    {
+      "id": "4d898586-a03f-4b53-ae76-09581533beca",
+      "key": "PRO-7D779E-54D78C-E4CD97",
+      "tier": "pro",
+      "note": "",
+      "status": "active",
+      "device_id": null,
+      "activated_at": null,
+      "created_at": "2026-03-31T05:56:07.450Z",
+      "expires_at": "2026-04-30T05:56:07.429Z"
+    },
+    {
+      "id": "589639ad-b005-4e7f-8831-3c4516f9ea4b",
+      "key": "PRO-CB1DA1-80C22B-EFD0B2",
+      "tier": "pro",
+      "note": "",
+      "status": "active",
+      "device_id": "51335ea4-38cc-4297-a7ef-ce5303cba229",
+      "activated_at": "2026-03-31T06:13:56.515Z",
+      "created_at": "2026-03-31T06:13:46.536Z",
+      "expires_at": "2026-04-30T06:13:46.488Z"
+    },
+    {
+      "id": "fcbf8815-7ba6-48c6-9585-18842cd2ad5f",
+      "key": "PRO-3A1BB7-8203EC-69DE70",
+      "tier": "pro",
+      "note": "",
+      "status": "active",
+      "device_id": null,
+      "activated_at": null,
+      "created_at": "2026-03-31T06:13:46.548Z",
+      "expires_at": "2026-04-30T06:13:46.488Z"
+    },
+    {
+      "id": "85985bd2-b14b-402e-aa62-72bdd777d82c",
+      "key": "PRO-4A0E48-86C178-94E1A4",
+      "tier": "pro",
+      "note": "",
+      "status": "active",
+      "device_id": null,
+      "activated_at": null,
+      "created_at": "2026-03-31T06:13:46.550Z",
+      "expires_at": "2026-04-30T06:13:46.488Z"
+    },
+    {
+      "id": "e6ae48b6-a9e0-48ee-90d0-e487c59d9944",
+      "key": "PRO-5A8FA5-EC5372-E22BCA",
+      "tier": "pro",
+      "note": "",
+      "status": "active",
+      "device_id": null,
+      "activated_at": null,
+      "created_at": "2026-03-31T06:13:46.552Z",
+      "expires_at": "2026-04-30T06:13:46.488Z"
+    },
+    {
+      "id": "9b730a33-d16b-49aa-86a6-af83de4eb18b",
+      "key": "PRO-7A1395-EF0654-1D07D0",
+      "tier": "pro",
+      "note": "",
+      "status": "active",
+      "device_id": null,
+      "activated_at": null,
+      "created_at": "2026-03-31T06:13:46.554Z",
+      "expires_at": "2026-04-30T06:13:46.488Z"
+    },
+    {
+      "id": "7ce95610-24fe-4a67-863b-15ad0e20ac8f",
+      "key": "PRO-932EAF-E02483-D8B800",
+      "tier": "pro",
+      "note": "",
+      "status": "active",
+      "device_id": null,
+      "activated_at": null,
+      "created_at": "2026-03-31T06:50:10.116Z",
+      "expires_at": null
+    },
+    {
+      "id": "23292e93-2051-4e1a-86b5-866b42b566a4",
+      "key": "PRO-AED0BD-84C807-937FE1",
+      "tier": "pro",
+      "note": "",
+      "status": "active",
+      "device_id": "ce33bcbf-4f3e-43df-93aa-3b906209d24d",
+      "activated_at": "2026-03-31T06:59:44.047Z",
+      "created_at": "2026-03-31T06:59:39.917Z",
+      "expires_at": null
+    },
+    {
+      "id": "cdefb068-307d-43bc-820e-61d1757a9fa6",
+      "key": "PRO-CC19AE-D5EA5F-87AA46",
+      "tier": "pro",
+      "note": "",
+      "status": "active",
+      "device_id": null,
+      "activated_at": null,
+      "created_at": "2026-03-31T06:59:39.921Z",
+      "expires_at": null
+    },
+    {
+      "id": "6a932e5a-f42f-45a0-9167-3be9a078463b",
+      "key": "PRO-C14F14-BDD48D-9EA9F9",
+      "tier": "pro",
+      "note": "",
+      "status": "active",
+      "device_id": null,
+      "activated_at": null,
+      "created_at": "2026-03-31T06:59:39.923Z",
+      "expires_at": null
+    },
+    {
+      "id": "10217f85-7820-4ede-956e-e79a6a67f5d9",
+      "key": "PRO-C38EED-485858-B88E61",
+      "tier": "pro",
+      "note": "",
+      "status": "active",
+      "device_id": null,
+      "activated_at": null,
+      "created_at": "2026-03-31T06:59:39.926Z",
+      "expires_at": null
+    },
+    {
+      "id": "ab929fcb-42a7-4e03-8620-cb252c56db11",
+      "key": "PRO-EBD91F-F77DF7-A7CBCB",
+      "tier": "pro",
+      "note": "",
+      "status": "active",
+      "device_id": null,
+      "activated_at": null,
+      "created_at": "2026-03-31T06:59:39.928Z",
+      "expires_at": null
+    }
+  ]
+}

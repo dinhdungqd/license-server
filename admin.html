@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Image Flow - License Manager</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', sans-serif; background: #0f172a; color: #e2e8f0; min-height: 100vh; }
+  .header { background: #1e293b; border-bottom: 1px solid #334155; padding: 16px 24px; display: flex; align-items: center; justify-content: space-between; }
+  .header h1 { font-size: 18px; font-weight: 700; color: #6366f1; }
+  .header .stats { display: flex; gap: 16px; font-size: 12px; color: #94a3b8; }
+  .stat { background: #0f172a; padding: 6px 12px; border-radius: 6px; border: 1px solid #334155; }
+  .stat span { color: #e2e8f0; font-weight: 700; }
+  .container { max-width: 1100px; margin: 0 auto; padding: 24px; }
+  .card { background: #1e293b; border: 1px solid #334155; border-radius: 10px; padding: 20px; margin-bottom: 20px; }
+  .card h2 { font-size: 14px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 16px; }
+  .form-row { display: flex; gap: 10px; flex-wrap: wrap; }
+  input, select { background: #0f172a; border: 1px solid #334155; color: #e2e8f0; padding: 8px 12px; border-radius: 6px; font-size: 13px; outline: none; }
+  input:focus, select:focus { border-color: #6366f1; }
+  input[type="text"] { flex: 1; min-width: 160px; }
+  .btn { padding: 8px 16px; border: none; border-radius: 6px; font-size: 13px; font-weight: 600; cursor: pointer; transition: 0.2s; }
+  .btn-primary { background: #6366f1; color: white; }
+  .btn-primary:hover { background: #4f46e5; }
+  .btn-success { background: #10b981; color: white; }
+  .btn-success:hover { background: #059669; }
+  .btn-danger { background: #ef4444; color: white; }
+  .btn-danger:hover { background: #dc2626; }
+  .btn-warning { background: #f59e0b; color: #0f172a; }
+  .btn-warning:hover { background: #d97706; }
+  .btn-sm { padding: 4px 10px; font-size: 11px; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th { text-align: left; padding: 10px 12px; color: #64748b; font-weight: 600; font-size: 11px; text-transform: uppercase; border-bottom: 1px solid #334155; }
+  td { padding: 10px 12px; border-bottom: 1px solid #1e293b; vertical-align: middle; }
+  tr:hover td { background: #0f172a; }
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 20px; font-size: 10px; font-weight: 700; }
+  .badge-active { background: #064e3b; color: #34d399; }
+  .badge-disabled { background: #450a0a; color: #f87171; }
+  .badge-expired { background: #451a03; color: #fb923c; }
+  .badge-pro { background: #312e81; color: #a5b4fc; }
+  .badge-free { background: #1e3a5f; color: #7dd3fc; }
+  .key-text { font-family: monospace; font-size: 12px; color: #a5b4fc; cursor: pointer; }
+  .key-text:hover { color: #6366f1; }
+  .device-text { font-size: 11px; color: #64748b; max-width: 120px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .actions { display: flex; gap: 6px; }
+  .login-box { max-width: 400px; margin: 80px auto; }
+  .login-box input { width: 100%; margin-bottom: 10px; }
+  .empty { text-align: center; padding: 40px; color: #475569; }
+  .toast { position: fixed; top: 20px; right: 20px; background: #10b981; color: white; padding: 10px 18px; border-radius: 8px; font-size: 13px; font-weight: 600; z-index: 999; display: none; }
+  .bulk-row { display: flex; gap: 10px; align-items: center; margin-bottom: 12px; flex-wrap: wrap; }
+  .count-input { width: 70px; }
+  #searchInput { width: 220px; }
+</style>
+</head>
+<body>
+
+<div id="loginSection" class="container">
+  <div class="login-box card">
+    <h2>🔐 Đăng nhập Admin</h2>
+    <br>
+    <input type="password" id="tokenInput" placeholder="Nhập Admin Token..." />
+    <button class="btn btn-primary" style="width:100%" onclick="login()">Đăng nhập</button>
+    <p id="loginErr" style="color:#ef4444;font-size:12px;margin-top:8px;"></p>
+  </div>
+</div>
+
+<div id="mainSection" style="display:none">
+  <div class="header">
+    <h1>⚡ Image Flow - License Manager</h1>
+    <div class="stats">
+      <div class="stat">Tổng: <span id="statTotal">0</span></div>
+      <div class="stat">Active: <span id="statActive">0</span></div>
+      <div class="stat">Đã kích hoạt: <span id="statUsed">0</span></div>
+      <div class="stat">Bị khóa: <span id="statDisabled">0</span></div>
+    </div>
+  </div>
+
+  <div class="container">
+    <!-- Tạo key -->
+    <div class="card">
+      <h2>➕ Tạo Key Mới</h2>
+      <div class="bulk-row">
+        <input type="number" class="count-input" id="bulkCount" value="1" min="1" max="100" placeholder="Số lượng" />
+        <select id="newTier">
+          <option value="pro">PRO</option>
+          <option value="free">FREE</option>
+        </select>
+        <select id="newExpiry">
+          <option value="">Vĩnh viễn</option>
+          <option value="30">30 ngày</option>
+          <option value="90">90 ngày</option>
+          <option value="180">180 ngày</option>
+          <option value="365">1 năm</option>
+        </select>
+        <input type="text" id="newNote" placeholder="Ghi chú (tên khách hàng...)" style="width:200px" />
+        <input type="text" id="newPrefix" placeholder="Prefix (PRO/VIP...)" style="width:100px" value="PRO" />
+        <button class="btn btn-success" onclick="createKeys()">Tạo Key</button>
+      </div>
+      <div id="newKeyResult" style="margin-top:10px;font-family:monospace;font-size:12px;color:#a5b4fc;white-space:pre-wrap;"></div>
+    </div>
+
+    <!-- Danh sách key -->
+    <div class="card">
+      <h2>📋 Danh Sách Key</h2>
+      <div class="form-row" style="margin-bottom:14px">
+        <input type="text" id="searchInput" placeholder="🔍 Tìm key, ghi chú..." oninput="renderTable()" />
+        <select id="filterStatus" onchange="renderTable()">
+          <option value="">Tất cả trạng thái</option>
+          <option value="active">Active</option>
+          <option value="disabled">Bị khóa</option>
+        </select>
+        <select id="filterTier" onchange="renderTable()">
+          <option value="">Tất cả tier</option>
+          <option value="pro">PRO</option>
+          <option value="free">FREE</option>
+        </select>
+        <button class="btn btn-primary btn-sm" onclick="loadKeys()">🔄 Refresh</button>
+        <button class="btn btn-danger btn-sm" onclick="exportKeys()">📥 Export</button>
+      </div>
+      <div style="overflow-x:auto">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Key</th>
+              <th>Tier</th>
+              <th>Trạng thái</th>
+              <th>Device</th>
+              <th>Kích hoạt lúc</th>
+              <th>Hết hạn</th>
+              <th>Ghi chú</th>
+              <th>Thao tác</th>
+            </tr>
+          </thead>
+          <tbody id="keyTable"></tbody>
+        </table>
+        <div id="emptyState" class="empty" style="display:none">Chưa có key nào</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+let ADMIN_TOKEN = '';
+let allKeys = [];
+
+function login() {
+  const t = document.getElementById('tokenInput').value.trim();
+  if (!t) return;
+  ADMIN_TOKEN = t;
+  loadKeys().then(ok => {
+    if (ok) {
+      document.getElementById('loginSection').style.display = 'none';
+      document.getElementById('mainSection').style.display = 'block';
+      localStorage.setItem('admin_token', t);
+    } else {
+      document.getElementById('loginErr').textContent = 'Token không đúng!';
+    }
+  });
+}
+
+async function api(method, path, body) {
+  const res = await fetch(path, {
+    method,
+    headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${ADMIN_TOKEN}` },
+    body: body ? JSON.stringify(body) : undefined
+  });
+  return res.json();
+}
+
+async function loadKeys() {
+  try {
+    const data = await api('GET', '/admin/keys');
+    if (!Array.isArray(data)) return false;
+    allKeys = data;
+    updateStats();
+    renderTable();
+    return true;
+  } catch { return false; }
+}
+
+function updateStats() {
+  document.getElementById('statTotal').textContent = allKeys.length;
+  document.getElementById('statActive').textContent = allKeys.filter(k => k.status === 'active').length;
+  document.getElementById('statUsed').textContent = allKeys.filter(k => k.device_id).length;
+  document.getElementById('statDisabled').textContent = allKeys.filter(k => k.status === 'disabled').length;
+}
+
+function renderTable() {
+  const search = document.getElementById('searchInput').value.toLowerCase();
+  const filterStatus = document.getElementById('filterStatus').value;
+  const filterTier = document.getElementById('filterTier').value;
+
+  let keys = allKeys.filter(k => {
+    if (search && !k.key.toLowerCase().includes(search) && !(k.note||'').toLowerCase().includes(search)) return false;
+    if (filterStatus && k.status !== filterStatus) return false;
+    if (filterTier && k.tier !== filterTier) return false;
+    return true;
+  });
+
+  const tbody = document.getElementById('keyTable');
+  const empty = document.getElementById('emptyState');
+
+  if (keys.length === 0) { tbody.innerHTML = ''; empty.style.display = 'block'; return; }
+  empty.style.display = 'none';
+
+  tbody.innerHTML = keys.map((k, i) => {
+    const isExpired = k.expires_at && new Date(k.expires_at) < new Date();
+    const statusBadge = isExpired ? '<span class="badge badge-expired">Hết hạn</span>'
+      : k.status === 'active' ? '<span class="badge badge-active">Active</span>'
+      : '<span class="badge badge-disabled">Khóa</span>';
+    const tierBadge = k.tier === 'pro' ? '<span class="badge badge-pro">PRO</span>' : '<span class="badge badge-free">FREE</span>';
+    const expiry = k.expires_at ? new Date(k.expires_at).toLocaleDateString('vi-VN') : '∞ Vĩnh viễn';
+    const activated = k.activated_at ? new Date(k.activated_at).toLocaleString('vi-VN') : '—';
+    const device = k.device_id ? `<span class="device-text" title="${k.device_id}">${k.device_id.substring(0,16)}...</span>` : '<span style="color:#475569">Chưa dùng</span>';
+
+    return `<tr>
+      <td style="color:#475569">${i+1}</td>
+      <td><span class="key-text" onclick="copyKey('${k.key}')" title="Click để copy">${k.key}</span></td>
+      <td>${tierBadge}</td>
+      <td>${statusBadge}</td>
+      <td>${device}</td>
+      <td style="font-size:11px;color:#64748b">${activated}</td>
+      <td style="font-size:11px;color:${isExpired?'#f87171':'#64748b'}">${expiry}</td>
+      <td style="font-size:11px;color:#94a3b8">${k.note||''}</td>
+      <td>
+        <div class="actions">
+          <button class="btn btn-warning btn-sm" onclick="toggleKey('${k.key}')">${k.status==='active'?'🔒 Khóa':'🔓 Mở'}</button>
+          <button class="btn btn-primary btn-sm" onclick="resetDevice('${k.key}')">🔄 Reset</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteKey('${k.key}')">🗑</button>
+        </div>
+      </td>
+    </tr>`;
+  }).join('');
+}
+
+async function createKeys() {
+  const count = parseInt(document.getElementById('bulkCount').value) || 1;
+  const tier = document.getElementById('newTier').value;
+  const note = document.getElementById('newNote').value;
+  const prefix = document.getElementById('newPrefix').value || 'PRO';
+  const expiryDays = document.getElementById('newExpiry').value;
+  const expires_at = expiryDays ? new Date(Date.now() + expiryDays*24*60*60*1000).toISOString() : null;
+
+  const created = [];
+  for (let i = 0; i < count; i++) {
+    const k = await api('POST', '/admin/keys', { tier, note, prefix, expires_at });
+    created.push(k.key);
+  }
+
+  document.getElementById('newKeyResult').textContent = created.join('\n');
+  showToast(`✅ Đã tạo ${created.length} key!`);
+  loadKeys();
+}
+
+async function toggleKey(key) {
+  await api('POST', `/admin/keys/${encodeURIComponent(key)}/toggle`);
+  showToast('Đã cập nhật trạng thái!');
+  loadKeys();
+}
+
+async function resetDevice(key) {
+  await api('POST', `/admin/keys/${encodeURIComponent(key)}/reset`);
+  showToast('Đã reset device!');
+  loadKeys();
+}
+
+async function deleteKey(key) {
+  if (!confirm(`Xóa key: ${key}?`)) return;
+  await api('DELETE', `/admin/keys/${encodeURIComponent(key)}`);
+  showToast('Đã xóa key!');
+  loadKeys();
+}
+
+function copyKey(key) {
+  navigator.clipboard.writeText(key);
+  showToast('📋 Đã copy: ' + key);
+}
+
+function exportKeys() {
+  const csv = ['Key,Tier,Status,Device,Activated,Expires,Note']
+    .concat(allKeys.map(k => `${k.key},${k.tier},${k.status},${k.device_id||''},${k.activated_at||''},${k.expires_at||''},${k.note||''}`))
+    .join('\n');
+  const a = document.createElement('a');
+  a.href = 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv);
+  a.download = 'licenses_' + new Date().toISOString().slice(0,10) + '.csv';
+  a.click();
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.style.display = 'block';
+  setTimeout(() => t.style.display = 'none', 2500);
+}
+
+// Auto login nếu có token lưu
+window.onload = () => {
+  const saved = localStorage.getItem('admin_token');
+  if (saved) { document.getElementById('tokenInput').value = saved; login(); }
+};
+
+document.getElementById('tokenInput').addEventListener('keydown', e => { if(e.key==='Enter') login(); });
+</script>
+</body>
+</html>
